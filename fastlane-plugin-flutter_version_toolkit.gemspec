@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'prasadsunny1@gmail.com'
 
   spec.summary       = 'A tool that help get version name and number from pubspec.yaml file in a flutter project'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-flutter_version_toolkit"
+  spec.homepage      = "https://github.com/prasadsunny1/fastlane-plugin-flutter_version_toolkit"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
