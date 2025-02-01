@@ -6,6 +6,11 @@ module Fastlane
     def self.all_classes
       Dir[File.expand_path('**/{actions,helper}/*.rb', File.dirname(__FILE__))]
     end
+
+    # Add method to read version from pubspec
+    def self.read_version_from_pubspec
+      Helper::FlutterVersionHelper.read_version_from_pubspec
+    end
   end
 end
 
