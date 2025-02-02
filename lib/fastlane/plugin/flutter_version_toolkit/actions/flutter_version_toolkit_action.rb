@@ -25,6 +25,7 @@ module Fastlane
       end
 
       def self.return_value
+        "Hello return value"
         # If your method provides a return value, you can describe here what it does
       end
 
