@@ -5,7 +5,10 @@ module Fastlane
   module Actions
     class FlutterVersionToolkitAction < Action
       def self.run(params)
-        UI.message("The flutter_version_toolkit plugin is working!")
+        version_info = Fastlane::FlutterVersionToolkit.read_version_from_pubspec
+        UI.user_error!("Could not retrieve version info from pubspec.yaml") if version_info.nil?
+        UI.message("Version Info: #{version_info.version_name} (build #{version_info.build_number})")
+        return version_info
       end
 
       def self.description
@@ -17,7 +20,7 @@ module Fastlane
       end
 
       def self.return_value
-        # If your method provides a return value, you can describe here what it does
+        "Returns a VersionInfo object with version name and build number, "
       end
 
       def self.details

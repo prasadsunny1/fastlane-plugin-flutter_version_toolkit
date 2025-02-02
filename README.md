@@ -10,11 +10,74 @@ This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To 
 fastlane add_plugin flutter_version_toolkit
 ```
 
+## Description
+
+This Fastlane plugin extracts version information from your Flutter project's pubspec.yaml file. It uses an action (defined in flutter_version_toolkit_action.rb) to read the version name and build number, enabling you to integrate version control seamlessly into your deployment process.
+
 ## About flutter_version_toolkit
 
-A tool that help get version name and number from pubspec.yaml file in a flutter project
+A Fastlane plugin that helps extract version information from your Flutter project's pubspec.yaml file. It provides actions to read the version name and build number, making it easier to integrate version control into your deployment process.
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+## Usage
+
+In your Fastfile, invoke the plugin as follows:
+
+The plugin offers the following actions:
+
+### get_flutter_version_name
+
+Retrieves the version name from your pubspec.yaml file.
+
+```ruby
+version_name = get_flutter_version_name(
+  pubspec_path: "./pubspec.yaml" # Optional, defaults to project root
+)
+puts "Version name: #{version_name}"
+```
+
+### get_flutter_version_code
+
+Retrieves the version code (build number) from your pubspec.yaml file.
+
+```ruby
+version_code = get_flutter_version_code(
+  pubspec_path: "./pubspec.yaml" # Optional, defaults to project root
+)
+puts "Version code: #{version_code}"
+```
+
+## Example Fastfile
+
+An example Fastfile to use the plugin in an Android deployment lane:
+
+```ruby
+default_platform(:android)
+
+platform :android do
+  desc "Deploy Android app to Play Store"
+  lane :deploy do
+    # Retrieve version information from Flutter's pubspec.yaml
+    version_name = get_flutter_version_name
+    version_code = get_flutter_version_code
+    
+    # Use these versions in your build configuration
+    gradle(
+      task: 'assemble',
+      build_type: 'Release',
+      properties: {
+        "versionName" => version_name,
+        "versionCode" => version_code
+      }
+    )
+    
+    upload_to_play_store(
+      track: 'internal',
+      version_name: version_name,
+      version_code: version_code
+    )
+  end
+end
+```
 
 ## Example
 
