@@ -6,6 +6,14 @@ module Fastlane
     class FlutterVersionToolkitAction < Action
       def self.run(params)
         UI.message("The flutter_version_toolkit plugin is working!")
+        
+        version_info = Helper::FlutterVersionHelper.read_version_from_pubspec
+        if version_info.nil?
+          UI.user_error!("Failed to fetch version information from pubspec.yaml")
+        else
+          UI.message("Version Name: #{version_info.version_name}")
+          UI.message("Build Number: #{version_info.build_number}")
+        end
       end
 
       def self.description
