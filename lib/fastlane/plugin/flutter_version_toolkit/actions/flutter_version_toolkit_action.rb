@@ -25,16 +25,19 @@ module Fastlane
 
       def self.details
         # Optional:
-        ".."
+        "Hello world"
       end
 
       def self.available_options
         [
-          # FastlaneCore::ConfigItem.new(key: :your_option,
-          #                         env_name: "FLUTTER_VERSION_TOOLKIT_YOUR_OPTION",
-          #                      description: "A description of your option",
-          #                         optional: false,
-          #                             type: String)
+          FastlaneCore::ConfigItem.new(
+            key: :pubspec_location,
+            env_name: 'PUBSPEC_LOCATION',
+            description: 'The location of pubspec.yml',
+            optional: true,
+            type: String,
+            default_value: '../pubspec.yaml'
+          ),
         ]
       end
 
